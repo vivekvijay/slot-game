@@ -1,0 +1,28 @@
+.container{
+    /* height: 20rem; */
+    height: 7rem;
+}
+
+.child{
+    width: 10rem;
+    height: 100%;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+}
+
+.child img {
+    width: 100%;
+    /* position: relative;
+    margin:0.3rem 0; */
+    top:115px;
+    position: absolute;    
+    transition: 'top .25s ease-in';
+    
+}
+
+.game-component {
+    /* margin-top: 115px; */
+    transition: 'all .25s ease-in';
+    position: relative;
+}
