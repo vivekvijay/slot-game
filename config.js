@@ -1,7 +1,7 @@
 module.exports={
     port:8080,
     appConfig:{
-        columns:10,
+        columns:3,
         images:[
             'images/Symbol_1.png',
             'images/Symbol_2.png',

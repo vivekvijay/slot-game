@@ -1,40 +1,12 @@
-// window.onload = function () {
-//     let count = 5,
-//         i = -1,
-//         j = -1;
-
-//     // component.style=count*-115+'px';
-//     setInterval(function () {
-//         i++;
-//         if(i>0){
-//             document.querySelector('.img'+(i-1)).style.top = '-115px';
-//         }
-        
-//         if (i ==count) {
-//             i = 0;
-//         document.querySelector('.img'+i).style.top = '0px';
-//         }
-        
-//     }, 1000);
-
-//     // setInterval(function () {
-//     //     j++;
-//     //     if (j ==count) {
-//     //         j = 0;
-//     //     }
-//     //     document.querySelector('.img'+i).style.top = '-115px';
-//     // }, 1000);
-// }
-
-(()=>{
+(() => {
     const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = function () {
         if (xmlhttp.readyState == XMLHttpRequest.DONE) {
             if (xmlhttp.status == 200) {
                 start(JSON.parse(xmlhttp.responseText));
-            }else{
+            } else {
                 alert('Some error occurred while retrieving config.');
-            }                       
+            }
         }
     };
     xmlhttp.open("GET", "/config", true);
@@ -42,22 +14,51 @@
 })();
 
 
-function start(config){
-    let count = 5,
-        i = -1,
-        j = -1;
+function start(config) {
 
-    // component.style=count*-115+'px';
+    let columnCount = config.columns,
+        imageCount = config.images.length,
+        e = 0,        
+        container = document.getElementsByClassName('container')[0],
+        img, child, prev, beforePrev, blocks;
+
+
+    for(let a=0;a<columnCount;a++){
+
+        child = container.appendChild(document.createElement("div"));
+        child.className="child";
+
+        for(let i=0;i<imageCount;i++){
+           img= child.appendChild(document.createElement("img"));
+           img.src=config.images[i];
+        }
+
+    }
+
+    blocks = document.getElementsByClassName('child');
+
     setInterval(function () {
-        i++;
-        if(i>0){
-            document.querySelector('.img'+(i-1)).style.top = '-115px';
+        e++;
+        if (e > imageCount) {
+            e = 1;
+        }
+        prev = e - 1, beforePrev = e - 2;
+
+        switch (prev) {
+            case 0:
+                prev = imageCount;
+                beforePrev = imageCount - 1;
+                break;
+            case 1:
+                beforePrev = imageCount;
+        }
+
+        for(let j=0;j<columnCount;j++){
+            blocks[j].children[e - 1].className = 'current';
+            blocks[j].children[prev - 1].className = 'previous';
+            blocks[j].children[beforePrev - 1].className = 'before-prev';
         }
         
-        if (i ==count) {
-            i = 0;
-        document.querySelector('.img'+i).style.top = '0px';
-        }
-        
-    }, 1000);
+
+    }, 200);
 }

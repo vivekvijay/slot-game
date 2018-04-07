@@ -1,6 +1,6 @@
 .container{
-    /* height: 20rem; */
-    height: 7rem;
+    height: 22rem;
+    /* height: 7rem; */
 }
 
 .child{
@@ -12,17 +12,37 @@
 }
 
 .child img {
-    width: 100%;
-    /* position: relative;
-    margin:0.3rem 0; */
-    top:115px;
     position: absolute;    
-    transition: 'top .25s ease-in';
-    
+    width: 100%;
+    top:230px;
+    opacity: 0;
+}
+.child img.current{
+    transition: all .2s ease-in;;
+    -webkit-transition: all .2s ease-in;;
+    -moz-transition: all .2s ease-in;;
+    -o-transition: all .2s ease-in;;
+    opacity: 1;
+    top:115px;   
 }
 
-.game-component {
-    /* margin-top: 115px; */
-    transition: 'all .25s ease-in';
-    position: relative;
+.child img.previous{
+    transition: all .2s ease-in;;
+    -webkit-transition: all .2s ease-in;;
+    -moz-transition: all .2s ease-in;;
+    -o-transition: all .2s ease-in;;
+    top:0;
+    opacity: 0;
 }
+
+.child img.before-prev{
+    opacity: 0;
+    top:230px;
+    transition: all .2s ease-in;;
+    -webkit-transition: all .2s ease-in;;
+    -moz-transition: all .2s ease-in;;
+    -o-transition: all .2s ease-in;;
+
+}
+
+        
