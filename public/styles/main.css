@@ -1,10 +1,28 @@
+.slot-machine{
+    text-align: center;
+}
 .container{
     height: 22rem;
-    /* height: 7rem; */
+}
+
+.start-button{
+    max-width: 5rem;
+    width: 20%;
+    margin-top: 2rem;
+    display: inline-block;
+}
+
+.start-button:hover{
+    opacity: 0.85;
+    cursor: pointer;
+}
+.start-button img{
+    width:100%;
 }
 
 .child{
-    width: 10rem;
+    width: 33%;
+    max-width: 15rem;
     height: 100%;
     overflow: hidden;
     display: inline-block;
@@ -16,21 +34,28 @@
     width: 100%;
     top:230px;
     opacity: 0;
+    left:0;
 }
+
+.child img.default-img{
+    top:115px;
+    opacity: 1;
+}
+
 .child img.current{
-    transition: all .2s ease-in;;
-    -webkit-transition: all .2s ease-in;;
-    -moz-transition: all .2s ease-in;;
-    -o-transition: all .2s ease-in;;
+    transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
     opacity: 1;
     top:115px;   
 }
 
 .child img.previous{
-    transition: all .2s ease-in;;
-    -webkit-transition: all .2s ease-in;;
-    -moz-transition: all .2s ease-in;;
-    -o-transition: all .2s ease-in;;
+    transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
     top:0;
     opacity: 0;
 }
@@ -38,11 +63,10 @@
 .child img.before-prev{
     opacity: 0;
     top:230px;
-    transition: all .2s ease-in;;
-    -webkit-transition: all .2s ease-in;;
-    -moz-transition: all .2s ease-in;;
-    -o-transition: all .2s ease-in;;
-
+    transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
 }
 
         

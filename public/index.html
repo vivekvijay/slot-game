@@ -8,24 +8,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel" src="scripts/dataAccess.js"></script>
+    <script type="text/babel" src="scripts/domManipulator.js"></script>
 </head>
 
 <body>
-    <div>
+    <div class="slot-machine">
         <div>Big Win!</div>
         <div id="tick"></div>
+
         <div class="container">
-            <!-- <div class="child">
-                <img class="img1" src="images/Symbol_1.png">
-                <img class="img2" src="images/Symbol_2.png">
-                <img class="img3" src="images/Symbol_3.png">
-                <img class="img4" src="images/Symbol_4.png">
-                <img class="img5" src="images/Symbol_5.png">
-            </div> -->
         </div>
 
-        <div></div>
+        <div class="start-button">
+            <img src='images/button.png'>
+        </div>
     </div>
+    
     <script type="text/babel" src="scripts/main.js"></script>
 </body>
 
