@@ -1,7 +1,7 @@
 
 let domManipulationModule = (() => {
 
-    let columns, images, gameContainer, outcome;
+    let columns, images, gameContainer, outcome=[];
 
     function start(config) {
 
@@ -34,31 +34,53 @@ let domManipulationModule = (() => {
         }
     }
 
-    function resetGame(){
-        while (gameContainer.firstChild) {
-            gameContainer.removeChild(gameContainer.firstChild);
-        }
-        loadComponents();
+    function resetGame() {
+        // while (gameContainer.firstChild) {
+        //     gameContainer.removeChild(gameContainer.firstChild);
+        // }
+        // loadComponents();
+        let blocks = getBlocks();
+        [].forEach.call(document.querySelectorAll('.current'), function (e) {
+            e.classList.add('default-img');
+        });
+
+        [].forEach.call(document.querySelectorAll('.before-prev, .previous, .current'), function (e) {
+            e.classList.remove('before-prev');
+            e.classList.remove('previous');
+            e.classList.remove('current');
+        });
+
     }
 
-    function spin(response,topImages) {
+    function spin(response, topImages) {
 
         let blocks = getBlocks(),
             columnCount = columns,
             imageCount = images.length,
             timer = [];
+            
+            outcome = response.selection;            
 
         for (let j = 0; j < columnCount; j++) {
 
             timer[j] = (() => {
-                let prev, beforePrev, start = j, slot = blocks[j], outcome = response.selection,
-                    rountCompleted = 0;
-                
+                let start = j,
+                    slot = blocks[j],
+                    rountCompleted = 0,
+                    prev, beforePrev, beginner;
+
+                if (topImages && topImages.length) {
+                    start = topImages[j];
+                }
+                else {
+                    start = j + 1;
+                }
+                beginner = start;
+
                 return setInterval(() => {
-                    start++;
+
                     if (start > imageCount) {
                         start = 1;
-                        ++rountCompleted;
                     }
                     prev = start - 1,
                         beforePrev = start - 2;
@@ -71,14 +93,18 @@ let domManipulationModule = (() => {
                             beforePrev = imageCount;
                     }
 
-                    slot.children[start - 1].className ='current';
+                    slot.children[start - 1].className = 'current';
                     slot.children[prev - 1].className = 'previous';
                     slot.children[beforePrev - 1].className = 'before-prev';
 
-                    if(rountCompleted==2 && Number(slot.children[start - 1].alt)==outcome[j]){
-                        // slot.children[start - 1].classList='current';
+                    if (beginner == start)
+                        ++rountCompleted;
+                    if (rountCompleted > 2 && Number(slot.children[start - 1].alt) == outcome[j]) {
                         clearInterval(timer[j]);
                     }
+
+                    start++;
+
                 }, 200);
             })();
 
@@ -98,9 +124,10 @@ let domManipulationModule = (() => {
             start(config);
         },
         startSpin: function (response) {
-            spin(response);
+            debugger;
+            spin(response,outcome);
         },
-        resetGame:function(){
+        resetGame: function () {
             resetGame();
         }
     }

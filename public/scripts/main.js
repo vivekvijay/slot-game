@@ -6,7 +6,7 @@
     dataAccess.getInitialConfig(domManipulator.getStart);
 
     document.querySelector('.start-button').addEventListener('click',()=>{
-        // domManipulator.resetGame();
+        domManipulator.resetGame();
         dataAccess.getResult(domManipulator.startSpin);        
     })
 
