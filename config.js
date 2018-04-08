@@ -3,9 +3,10 @@ module.exports={
     appConfig:{
         columns:3,
         messages:[
-            'No Win', 'Small Win!','Big Win!' 
+            'No Win', 'Small Win!','Big Win!'
         ],
         images:[
+            'images/Symbol_0.png',
             'images/Symbol_1.png',
             'images/Symbol_2.png',
             'images/Symbol_3.png',

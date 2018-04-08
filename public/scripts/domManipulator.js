@@ -29,7 +29,7 @@ let domManipulationModule = (() => {
 
             child = gameContainer.appendChild(document.createElement("div"));
             child.className = "child";
-
+            child.style.width = (100 / columns) + '%';
             for (let i = 0; i < imageCount; i++) {
                 img = child.appendChild(document.createElement("img"));
                 img.src = images[i];
