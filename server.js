@@ -11,15 +11,22 @@ app.get('/config',(request,response) => {
 app.get('/result',(request,response) => {
     const result={
         selection:[],
-        bonus:null
+        bonusRoundActivated:null
     },
     max = config.appConfig.images.length,
     min=1,
     columns = config.appConfig.columns;
+   
+    let bonusRound;
 
     for(let i=0;i<columns;i++){
         result.selection.push(Math.floor(Math.random() * (max - min + 1)) + min);
     }
+
+    bonusRound = Math.floor(Math.random() * (max - min + 1)) + min
+
+    result.bonusRoundActivated = (bonusRound == 2)?true:false;
+
     response.json(result);
 });
 

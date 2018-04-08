@@ -2,19 +2,63 @@
     text-align: center;
 }
 .container{
-    height: 22rem;
+    /* height: 22rem; */
+    height: 15rem;
+    position: relative;
+    border: 1px solid;
 }
 
+.container.bonus-round::after{
+
+    content: 'Bonus Round Activated...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 100%;
+    padding: 2rem 0;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px #000;
+}
+
+.message-container{
+    height: 5rem;
+    display: table;
+    width: 100%;
+}
+.message{
+    color: #f00;
+    font-size: 2rem;
+    font-weight: bold;
+    opacity: 0;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.message.show{
+    opacity: 1;
+    transition: opacity 0.25s ease-in;
+}
 .start-button{
     max-width: 5rem;
     width: 20%;
     margin-top: 2rem;
     display: inline-block;
+    background: transparent;
+    border: none;
+    outline: none;
 }
 
 .start-button:hover{
     opacity: 0.85;
     cursor: pointer;
+}
+.start-button:disabled{
+    opacity: 0.5;
+    cursor: default;
 }
 .start-button img{
     width:100%;
@@ -32,13 +76,15 @@
 .child img {
     position: absolute;    
     width: 100%;
-    top:230px;
+    max-width: 15rem;
+    top:100%;
     opacity: 0;
     left:0;
 }
 
 .child img.default-img{
-    top:115px;
+    top: 50%;
+    transform: translate(0,-50%);
     opacity: 1;
 }
 
@@ -48,7 +94,8 @@
     -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
     opacity: 1;
-    top:115px;   
+    top: 50%;
+    transform: translate(0,-50%);
 }
 
 .child img.previous{
@@ -56,17 +103,17 @@
     -webkit-transition: all .2s ease-in;
     -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
-    top:0;
+    top:-100%;
     opacity: 0;
 }
 
 .child img.before-prev{
-    opacity: 0;
-    top:230px;
     transition: all .2s ease-in;
     -webkit-transition: all .2s ease-in;
     -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
+    opacity: 0;
+    top:100%;
 }
 
         
