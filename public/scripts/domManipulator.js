@@ -6,20 +6,28 @@ let domManipulationModule = (() => {
         outcome = [],
         timers = 0,
         messages,
+        spinRound,
         isBonusRoundActivated = false;
 
+    /*
+    *Called initially to set initial config to variables and load images and their container 
+    * as per backend service.
+    * Values from the API reaches this method as "config"
+    * @param {config} is an object with initial column count, messages and images 
+    */
     function start(config) {
 
         //setting initial configurations
         columns = config.columns;
         images = config.images;
         messages = config.messages;
-
+        spinRound = config.spinRound;
         gameContainer = getSlotContainer();
 
         loadComponents();
     }
 
+    //Adds container, images to DOM
     function loadComponents() {
 
         let imageCount = images.length,
@@ -41,6 +49,7 @@ let domManipulationModule = (() => {
         }
     }
 
+    //Method used to reset the game.
     function resetGame() {
 
         [].forEach.call(document.querySelectorAll('.current'), (e) => {
@@ -60,6 +69,11 @@ let domManipulationModule = (() => {
         getSlotContainer().classList.remove('bonus-round');
     }
 
+    /*
+    *This method is called immediately after retriving the response from API:/result
+    * @param {response} represet the spin result. Also contain a boolean value which decide 
+    * whether or not to active bonus round
+    * */
     function spin(response, topImages) {
 
         let blocks = getBlocks(),
@@ -86,6 +100,12 @@ let domManipulationModule = (() => {
         }
     }
 
+    /*
+    *This method spin the columns individually. Necessary params are supplied as arguments
+    * @param {index} represet the column no
+    * @param {start} represet the first image to be shown
+    * @param {slot} represet the column itself
+    */
     function startTimer(index, start, slot) {
         let timer, prev, beforePrev,
             imageCount = images.length,
@@ -115,7 +135,7 @@ let domManipulationModule = (() => {
             if (beginner == start)
                 ++rountCompleted;
 
-            if (rountCompleted > 2 && Number(slot.children[start - 1].alt) == outcome[index]) {
+            if (rountCompleted > spinRound && Number(slot.children[start - 1].alt) == outcome[index]) {
                 clearInterval(timer);
                 ++timers;
                 if (columns === timers) {
@@ -129,6 +149,10 @@ let domManipulationModule = (() => {
         }, 200);
     }
 
+    /*
+    * This method is fired to display the wining statement on the top. This checks the count
+    * of similar outcomes. 
+    */
     function displayWinStmt() {
         let itemOccurence,
             highestOccurence = 0,
@@ -165,15 +189,16 @@ let domManipulationModule = (() => {
 
     }
 
-
+    /*
+    * This method is called to check whether bonus round is activated or not. 
+    */
     function checkForBonusRound() {
-
 
         if (isBonusRoundActivated) {
             getSlotContainer().classList.add('bonus-round');
             setTimeout(() => {
                 document.getElementsByClassName('start-button')[0].disabled = false;
-                bonusRoundActivated();
+                ativeBonusRound();
             }, 3000);
 
         }
@@ -182,14 +207,17 @@ let domManipulationModule = (() => {
 
     }
 
-    function bonusRoundActivated() {
+    //This method is trigged if bonus round is activate as per theAPI response
+    function ativeBonusRound() {
         document.getElementsByClassName('start-button')[0].click();
     }
 
+    //Returns the parent dom elements of the columns
     function getSlotContainer() {
         return document.getElementsByClassName('container')[0];
     }
 
+    //Returns the dom elements representing columns
     function getBlocks() {
         return document.getElementsByClassName('child');
     }

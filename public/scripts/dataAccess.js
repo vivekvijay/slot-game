@@ -5,8 +5,9 @@ let dataAccessModule= (() => {
         resultURL = '/result';
 
     //Error messages
-    const retriveFailed = 'Some error occurred while retrieving config.';
+    const retriveFailed = 'Some error occurred while retrieving data.';
     
+    //Method used for API calls
     function callAPI(url,callback){
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
@@ -22,19 +23,24 @@ let dataAccessModule= (() => {
         xmlhttp.send();
     }
     
+    //Private method called on application load for fetching initial configuration
     function fetchInitialConfig(callback) {
         callAPI(initialConfigURL,callback);
     }
 
+    //Private method called on button click to fetch the outcomes
     function fetchResult(callback) {
         callAPI(resultURL,callback);
     }
 
+    //Error handler
     function errorHandler(msg){
         alert(msg);
     }
 
     return{
+        //Public methods for transferring API response.
+        
         getInitialConfig : function(callback){
             fetchInitialConfig(callback);
         },

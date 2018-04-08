@@ -1,11 +1,19 @@
-module.exports={
-    port:8080,
-    appConfig:{
-        columns:3,
-        messages:[
-            'No Win', 'Small Win!','Big Win!'
+module.exports = {
+    appConfig: {
+
+        //Decides no. of columns in the UI
+        columns: 3,
+
+        //No. of times each images to spin
+        spinRound:2,
+        
+        //Winning message for UI. Can add more to the list for customization
+        messages: [
+            'No Win', 'Small Win!', 'Big Win!'
         ],
-        images:[
+
+        //Supply initial set of images.
+        images: [
             'images/Symbol_0.png',
             'images/Symbol_1.png',
             'images/Symbol_2.png',

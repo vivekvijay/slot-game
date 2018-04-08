@@ -1,33 +1,16 @@
-const config = require('./config');
+
+const handler = require('./serviceHandler');
 const express = require('express');
 const app = express();
+const port = 8080;
 
+//Serves static content from folder "public"
 app.use(express.static('public'));
 
-app.get('/config',(request,response) => {
-    response.json(config.appConfig);
-});
+//Called on application load for initial configuration
+app.get('/config', handler.getInitialCOnfig);
 
-app.get('/result',(request,response) => {
-    const result={
-        selection:[],
-        bonusRoundActivated:null
-    },
-    max = config.appConfig.images.length,
-    min=1,
-    columns = config.appConfig.columns;
-   
-    let bonusRound;
+//Triggered on button click to get winning result
+app.get('/result', handler.getResult);
 
-    for(let i=0;i<columns;i++){
-        result.selection.push(Math.floor(Math.random() * (max - min + 1)) + min);
-    }
-
-    bonusRound = Math.floor(Math.random() * (max - min + 1)) + min
-
-    result.bonusRoundActivated = (bonusRound == 2)?true:false;
-
-    response.json(result);
-});
-
-app.listen(config.port, () => console.log(`App listening on port ${config.port}!`));
+app.listen(port, () => console.log(`App listening on port ${port}!`));
